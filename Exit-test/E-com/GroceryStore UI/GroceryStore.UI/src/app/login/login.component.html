@@ -1,0 +1,24 @@
+<div class="d-flex justify-content-center align-items-start">
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmitted()">
+        <div class="row">
+            <div class="col text-center p-2 mb-3">
+                <span class="fs-3">Login</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="email" class="form-control placeholder-center" id="email" formControlName="email" placeholder="Enter Email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="password" class="form-control placeholder-center" id="password" formControlName="password" placeholder="Enter Password">
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col button-center">
+                <button class="btn btn-primary" type="submit">Login</button>
+            </div>
+        </div>
+    </form>
+</div>

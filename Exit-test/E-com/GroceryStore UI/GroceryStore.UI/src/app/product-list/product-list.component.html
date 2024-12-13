@@ -1,0 +1,83 @@
+<div class="container my-5">
+  <div class="row mb-3">
+    <div class="col-lg-3">
+      <label for="category">Category:</label>
+      <select class="form-control" id="category" (change)="onCategoryChange($event)">
+        <option value="">All Categories</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search product...">
+    <button (click)="search()">Search</button>
+  </div>
+  
+  <table class="table" *ngIf="products">
+    <thead>
+      <tr class="table-dark">
+        <th>Product</th>
+        <th>Description</th>
+        <th>
+          Price
+          <button (click)="toggleSortDirection()">
+            {{ sortDirection === 'asc' ? '▲' : '▼' }}
+          </button>
+        </th>        
+        <th>Image</th>
+        <th>
+          <div class="admin" *ngIf="currentUser && currentUser.id === 1">
+            Action
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of getPaginatedProducts()">
+        <td><a [routerLink]="['/product-details', product.id]">{{ product.productName }}</a></td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td><img [src]="product.imageUrl" alt="Product Image" height="100"></td>
+        <td>
+          <div class="entry-row" *ngIf="currentUser && currentUser.id === 1">
+            <div class="col">
+              <a [routerLink]="['edit-product', product.id]">Edit</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="products.length === 0 && searchTerm">No products found</p>
+  <p *ngIf="products.length === 0 && !searchTerm">No products available</p>
+
+    <nav class="pagination-container" aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="currentPage = 1" aria-label="First">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="currentPage = currentPage - 1" aria-label="Previous">
+              <span aria-hidden="true">&lt;</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of getPaginationArray()" [class.active]="page === currentPage">
+            <a class="page-link" (click)="currentPage = page">{{ page }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+            <a class="page-link" (click)="currentPage = currentPage + 1" aria-label="Next">
+              <span aria-hidden="true">&gt;</span>
+            </a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+            <a class="page-link" (click)="currentPage = getTotalPages()" aria-label="Last">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+</div>

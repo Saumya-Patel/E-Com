@@ -1,0 +1,23 @@
+<div class="container my-5">
+    <h2>My Orders</h2>
+    <div *ngIf="orders && orders.length > 0"> <!--check orders array exist and has length greater than zero -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>    
+            <th></th>     
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of orders">
+            <td><b>Total items: </b>{{ item.totalItems }}</td>
+            <td><b>Date ordered: </b>{{ item.date | date:'dd/MM/yyyy' }}</td>           
+            <td><button type="submit" class="btn btn-primary" (click)="viewOrder(item.id)">View Order</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p *ngIf="orders && orders.length === 0">Your order list is empty.</p>
+  </div>
+  

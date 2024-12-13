@@ -1,0 +1,17 @@
+.button-group-newline {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button-group-newline button {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.quantity {
+  margin-right: 10px;
+  margin-top: 1.5px;
+  align-self: center;
+}

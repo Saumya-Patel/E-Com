@@ -1,0 +1,12 @@
+.placeholder-center::placeholder {
+    text-align: center;
+    color: #999999;
+}
+
+.button-center {
+    text-align: center;
+}
+
+.row {
+    margin-bottom: 5px;
+}

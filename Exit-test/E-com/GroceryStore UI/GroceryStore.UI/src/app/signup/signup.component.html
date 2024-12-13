@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center align-items-start">
+    <form [formGroup]="registerForm" (ngSubmit)="registerSubmitted()">
+        <div class="row">
+            <div class="col text-center p-2 mb-3">
+                <span class="fs-3">Signup</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control placeholder-center" id="fullName" formControlName="fullName" placeholder="Full Name">
+            </div>
+            <div class="form-text text-danger" *ngIf="FullName.errors?.['required'] && FullName.touched">
+                Full Name is required
+            </div>
+            <div class="form-text text-danger" *ngIf="FullName.errors?.['maxlength']">
+                Name is too big
+            </div>
+            <div class="form-text text-danger" *ngIf="FullName.errors?.['pattern']">
+                Name should be all alphabets
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="email" class="form-control placeholder-center" id="email" formControlName="email" placeholder="Email">
+            </div>
+            <div class="form-text text-danger" *ngIf="Email.errors?.['required'] && Email.touched">
+                Email is required
+            </div>
+            <div class="form-text text-danger" *ngIf="Email.errors?.['email']">
+                Email is invalid
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="tel" class="form-control placeholder-center" id="phNo" formControlName="phNo" placeholder="Phone Number">
+            </div>
+            <div class="form-text text-danger" *ngIf="Phno.errors?.['required'] && Phno.touched">
+                Phone Number is required
+            </div>
+            <div class="form-text text-danger" *ngIf="Phno.errors?.['maxlength'] || Phno.errors?.['minlength'] || Phno.errors?.['pattern']">
+                Invalid Phone Number
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="password" class="form-control placeholder-center" id="pwd" formControlName="pwd" placeholder="Password">
+            </div>
+            <div class="form-text text-danger" *ngIf="Pwd.errors?.['required'] && Pwd.touched">
+                Password is required
+            </div>
+            <div class="form-text text-danger" *ngIf="Pwd.errors?.['minlength']">
+                Password must be atleast 8 characters
+            </div>
+            <div class="form-text text-danger" *ngIf="Pwd.errors?.['pattern']">
+                Password must have at-least 1 special character, 1 number and 1 alphabet                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="password" class="form-control placeholder-center" id="cnfPwd" formControlName="cnfPwd" placeholder="Confirm Password">
+            </div>
+            <div class="form-text text-danger" [ngStyle]="{'display': confirmPass}">
+                Password and Confirm Password doesn't match             
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col button-center">
+                <button class="btn btn-primary" type="submit" [disabled]="registerForm.invalid">Signup</button>
+            </div>
+        </div>
+    </form>
+</div>

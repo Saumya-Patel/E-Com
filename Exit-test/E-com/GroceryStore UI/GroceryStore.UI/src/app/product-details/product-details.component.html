@@ -1,0 +1,50 @@
+<div class="container my-5">
+  <h2>Product Details</h2>
+  <div *ngIf="productDetails">
+    <div class="row">
+      <div class="col-md-6">
+        <img [src]="productDetails.imageUrl" alt="Product Image" height="200">
+      </div>
+      <div class="col-md-6">
+        <h4>{{ productDetails.productName }}</h4>
+        <p>{{ productDetails.description }}</p>
+        <p>Price: ₹ {{ productDetails.price }}</p>
+        <p>Discount: {{ productDetails.discount }} % off</p>        
+
+        <div class="cart-item-count" *ngIf="currentUser && currentUser.id !== 1">
+          <div class="button-group" *ngIf="productDetails.inStock">
+            <p>In Stock: {{ productDetails.inStock }}</p>
+            <div class="button-group-newline">
+              <button class="btn btn-primary btn-round" (click)="decrementQnty()" [disabled]="productDetails.itemsAdded === 0">-</button>
+              <span class="quantity">{{ productDetails.itemsAdded }}</span>
+              <button class="btn btn-primary btn-round" (click)="incrementQnty()" [disabled]="productDetails.itemsAdded === productDetails.inStock">+</button>
+            </div>
+          </div>
+          <div class="no-stock text-danger" *ngIf="!productDetails.inStock">
+            <p>* Out of stock</p>
+          </div>
+        </div>               
+      </div>      
+    </div>
+
+    <h2>Comments</h2>
+    <div *ngIf="comments && comments.length > 0">
+      <ul>
+        <li *ngFor="let comment of comments">
+          <p><strong>{{ comment.userName }}</strong></p>
+          <p>{{ comment.comment }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="currentUser">
+      <div class="form-group">
+        <label for="comment">Leave a comment:</label>
+        <textarea id="comment" [(ngModel)]="userComment" class="form-control"></textarea>
+      </div>
+      <button class="btn btn-primary" (click)="postComment()">Post Comment</button>
+    </div>
+
+  </div>
+  <p *ngIf="!productDetails">Product details not found.</p>
+</div>

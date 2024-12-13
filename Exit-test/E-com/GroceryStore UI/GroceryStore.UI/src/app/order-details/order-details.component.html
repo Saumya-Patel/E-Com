@@ -1,0 +1,27 @@
+<div class="container my-5">
+    <h2>My Ordered Cart</h2>
+    <div *ngIf="cartItems && cartItems.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Details</th>
+            <th>Quantity</th>     
+            <th></th>     
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems">
+            <td><img [src]="item.imageUrl" alt="Product Image" style="height: 100px;"/></td>
+            <td>
+              <div>{{ item.description }}</div>
+              <div>Total: ₹ {{ item.total }}</div>
+            <td>{{ item.quantity }}</td>     
+            <td><a [routerLink]="'/product-details/' + item.productId">View</a></td>          
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p *ngIf="cartItems && cartItems.length === 0">Your cart is empty.</p>
+  </div>
+  

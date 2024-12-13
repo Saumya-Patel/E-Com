@@ -1,0 +1,16 @@
+.button-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .button-group button {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .quantity {
+    margin-right: 10px;
+  }
+  
